@@ -4,66 +4,28 @@ module "labels" {
   name    = var.name
 }
 
-resource "aws_iam_role" "iam_for_lambda" {
-  name = "iam_for_lambda"
 
-    assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-  EOF
-}
-
-resource "aws_iam_role_policy" "test_policy" {
-  name = "iam_for_lambda"
-  role = aws_iam_role.iam_for_lambda.id
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "dynamodb:DeleteItem",
-          "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:Scan",
-          "dynamodb:UpdateItem"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-}
-
-data "archive_file" "test" {
+data "archive_file" "get_all_authors" {
   type        = "zip"
-  source_file = "${path.module}/test.js"
-  output_path = "modules/lambda/eu-central-1/test.zip"
+  source_file = "${path.module}/js-function/get-all-authors/get-all-authors.js"
+  output_path = "modules/lambda/eu-central-1/js-function/get-all-authors/get-all-authors.zip"
 }
 
-resource "aws_lambda_function" "test_lambda" {
-  filename      = "modules/lambda/eu-central-1/test.zip"
-  function_name = module.labels.id
-  role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "index.handler"
+resource "aws_lambda_function" "get_all_authors" {
+  filename      = data.archive_file.get_all_authors.output_path
+  function_name = "${module.labels.id}-get-all-authors"
+  role          = var.role_get_all_authors_arn
+  handler       = "get-all-authors.handler"
 
-  # The filebase64sha256() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
-  # source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
-#   source_code_hash = filebase64sha256("lambda_function_payload.zip")
+  #   # The filebase64sha256() function is available in Terraform 0.11.12 and later
+  #   # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
+  #   # source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
+  source_code_hash = data.archive_file.get_all_authors.output_base64sha256
 
   runtime = "nodejs14.x"
+  environment {
+    variables = {
+      "TABLE_NAME" = var.dynamo_db_authors_name
+    }
+  }
 }
