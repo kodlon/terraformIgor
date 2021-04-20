@@ -45,7 +45,14 @@ module "iam" {
 }
 
 
-
+module "budget" {
+  source                     = "./modules/budget"
+  context                    = module.base_labels.context
+  name                       = "budget"
+  subscriber_email_addresses = var.subscriber_email_addresses
+  slack_webhook_url          = var.slack_webhook_url
+  # author_name                = var.author_name
+}
 
 
 
