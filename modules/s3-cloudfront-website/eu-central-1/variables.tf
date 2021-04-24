@@ -1,6 +1,6 @@
 variable "domain_name" {
   type        = string
-  description = "exampleeee.com"
+  description = "Domain name"
 }
 /* 
 variable "zone_id" {

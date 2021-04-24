@@ -2,17 +2,6 @@ variable "region" {
   type = string
 }
 
-variable "namespace" {
-  type = string
-}
-
-variable "stage" {
-  type = string
-}
-
-variable "delimiter" {
-  type = string
-}
 
 variable "marketplace_cloudfront_min_ttl" {
   type = number
@@ -54,3 +43,4 @@ variable "slack_webhook_url" {
 variable "author_name" {
   type = string
 }
+

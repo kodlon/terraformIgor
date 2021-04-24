@@ -151,23 +151,28 @@ resource "aws_cloudfront_origin_access_identity" "default" {
   zone_id = var.zone_id
   name    = local.domain_name
   type    = "A"
+
   alias {
     name                   = aws_cloudfront_distribution.this.domain_name
     zone_id                = aws_cloudfront_distribution.this.hosted_zone_id
     evaluate_target_health = false
   }
+
   depends_on = [
     aws_cloudfront_distribution.this,
   ]
+
 } */
 
 /* resource "aws_acm_certificate" "this" {
   domain_name       = local.domain_name
   validation_method = "DNS"
   tags              = module.labels.tags
+
   lifecycle {
     create_before_destroy = true
   }
+
 } */
 /* 
 resource "aws_route53_record" "cert_validation" {
@@ -179,6 +184,7 @@ resource "aws_route53_record" "cert_validation" {
     tolist(aws_acm_certificate.this.domain_validation_options)[0].resource_record_value
   ]
 }
+
 resource "aws_acm_certificate_validation" "this" {
   certificate_arn = aws_acm_certificate.this.arn
   validation_record_fqdns = [

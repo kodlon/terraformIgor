@@ -6,6 +6,6 @@ variable "slack_webhook_url" {
   type = string
 }
 
-# variable "author_name" {
-#   type = string
-# }
+variable "author_name" {
+  type = string
+}

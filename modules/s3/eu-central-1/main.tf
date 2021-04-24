@@ -1,7 +1,8 @@
 module "labels" {
-  source  = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.24.1"
-  context = var.context
-  name    = var.name
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.24.1"
+  context     = var.context
+  name        = var.name
+  label_order = var.label_order
 }
 
 data "aws_caller_identity" "current" {}

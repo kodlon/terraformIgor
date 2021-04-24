@@ -8,7 +8,7 @@ module "labels" {
 resource "aws_iam_role" "iam_for_get_all_authors" {
   name = "${module.labels.id}_for_get_all_authors"
 
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -32,22 +32,22 @@ resource "aws_iam_role_policy" "get_all_authors_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        "Resource" : "arn:aws:logs:*:*:*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : "dynamodb:Scan",
-        "Resource" : [var.dynamo_db_authors_arn]
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:Scan",
+            "Resource": [var.dynamo_db_authors_arn]
+        }
     ]
   })
 }
@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "get_all_authors_policy" {
 resource "aws_iam_role" "iam_for_get_all_courses" {
   name = "${module.labels.id}_for_get_all_courses"
 
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -80,22 +80,22 @@ resource "aws_iam_role_policy" "get_all_courses_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        "Resource" : "arn:aws:logs:*:*:*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : "dynamodb:Scan",
-        "Resource" : [var.dynamo_db_courses_arn]
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:Scan",
+            "Resource": [var.dynamo_db_courses_arn]
+        }
     ]
   })
 }
@@ -104,7 +104,7 @@ resource "aws_iam_role_policy" "get_all_courses_policy" {
 resource "aws_iam_role" "iam_for_get_course" {
   name = "${module.labels.id}_for_get_course"
 
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -128,22 +128,22 @@ resource "aws_iam_role_policy" "get_course_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        "Resource" : "arn:aws:logs:*:*:*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : "dynamodb:GetItem",
-        "Resource" : [var.dynamo_db_courses_arn]
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:GetItem",
+            "Resource": [var.dynamo_db_courses_arn]
+        }
     ]
   })
 }
@@ -152,7 +152,7 @@ resource "aws_iam_role_policy" "get_course_policy" {
 resource "aws_iam_role" "iam_for_save_update_course" {
   name = "${module.labels.id}_for_save_update_course"
 
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -176,22 +176,22 @@ resource "aws_iam_role_policy" "save_update_course_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        "Resource" : "arn:aws:logs:*:*:*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : "dynamodb:PutItem",
-        "Resource" : [var.dynamo_db_courses_arn]
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:PutItem",
+            "Resource": [var.dynamo_db_courses_arn]
+        }
     ]
   })
 }
@@ -200,7 +200,7 @@ resource "aws_iam_role_policy" "save_update_course_policy" {
 resource "aws_iam_role" "iam_for_delete_course" {
   name = "${module.labels.id}_for_delete_course"
 
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -224,22 +224,23 @@ resource "aws_iam_role_policy" "delete_course_policy" {
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ],
-        "Resource" : "arn:aws:logs:*:*:*"
-      },
-      {
-        "Effect" : "Allow",
-        "Action" : "dynamodb:DeleteItem",
-        "Resource" : [var.dynamo_db_courses_arn]
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:DeleteItem",
+            "Resource": [var.dynamo_db_courses_arn]
+        }
     ]
   })
 }
+#[var.dynamo_db_authors_arn, var.dynamo_db_courses_arn]

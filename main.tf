@@ -33,6 +33,8 @@ module "lambda" {
 
   dynamo_db_authors_name = module.dynamo_db_authors.dynamp_db_name
   dynamo_db_courses_name = module.dynamo_db_courses.dynamp_db_name
+
+  api_gateway_execution_arn = module.api-gateway.execution_arn
 }
 
 
@@ -51,7 +53,7 @@ module "budget" {
   name                       = "budget"
   subscriber_email_addresses = var.subscriber_email_addresses
   slack_webhook_url          = var.slack_webhook_url
-  # author_name                = var.author_name
+  author_name                = var.author_name
 }
 
 module "notified_Lambda" {

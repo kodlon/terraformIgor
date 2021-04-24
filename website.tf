@@ -1,9 +1,9 @@
 module "website" {
   source                         = "./modules/s3-cloudfront-website/eu-central-1"
   context                        = module.base_labels.context
-  # label_order                    = var.label_order
-  # environment                    = var.environment
-  name                           = "website"
+  label_order                    = var.label_order
+  environment                    = var.environment
+  name                           = module.base_labels.id
   domain_name                    = "exampleeee.com"
   /* zone_id                        = aws_route53_zone.this.zone_id */
   website_cloudfront_min_ttl     = var.website_cloudfront_min_ttl

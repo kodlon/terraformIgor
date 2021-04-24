@@ -33,3 +33,8 @@ variable "dynamo_db_courses_name" {
   description = "dynamo_db_courses_name"
   type        = string
 }
+
+variable "api_gateway_execution_arn" {
+  description = "api_gateway_execution_arn"
+  type        = string
+}
